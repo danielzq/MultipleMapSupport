@@ -17,3 +17,5 @@ dependencies {
 	        implementation 'com.github.danielzq:MultipleMapSupport:1.0'
 }
 ```
+
+[![](https://jitpack.io/v/danielzq/MultipleMapSupport.svg)](https://jitpack.io/#danielzq/MultipleMapSupport)
