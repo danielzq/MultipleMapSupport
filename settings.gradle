@@ -1,1 +1,2 @@
 include ':app', ':mapengine'
+rootProject.name = 'MultipleMapSupport'
