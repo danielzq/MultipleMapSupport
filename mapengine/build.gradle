@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.danielzq'
 
+apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 28
 
@@ -23,6 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 repositories {
@@ -38,4 +44,12 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.google.android.gms:play-services-maps:16.0.0"
     implementation "com.google.android.gms:play-services-location:16.0.0"
+}
+
+publish {
+    userOrg = 'zq26zhangqi'      // bintray注册的用户名
+    groupId = 'com.github.danielzq'
+    desc = 'v1.0.5 Release'
+    artifactId = 'MultipleMapSupport'// bintray创建的package
+    publishVersion = '1.0.5'
 }
