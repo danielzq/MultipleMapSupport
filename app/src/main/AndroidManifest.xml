@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="multiplemaps.demo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:maxSdkVersion="22" />
+    <!-- EXTERNAL_STORAGE permissions are optional for Android 6.0 onwards. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="22" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity"/>
+
+        <!-- Google -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.wearable.beta.app" -->
+        <!-- android:resource="@xml/config" /> -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <!-- Here -->
+        <meta-data
+            android:name="com.here.android.maps.appid"
+            android:value="YWBxleYKQIBUjUpr3pgb" />
+        <meta-data
+            android:name="com.here.android.maps.apptoken"
+            android:value="HgxPS1uihbJwxsak0Jg9cQ" />
+        <meta-data
+            android:name="com.here.android.maps.license.key"
+            android:value="iX8KTT2aqj1oiBUNbZuVsg7nzBv53QhUceVAqeWi3jpXKeLotmuL1bZDRk+yuZ4dKvKoET6HyIm0/cHti4bHE6UAFij122eu58/zvdWOpxB/r3p3z/82KqoXQBz/Qx/mlSi/BRDMv3jleRuVde1G7pq+m7zKsNi/fIENSaYGC2xtC6q3QzBfUqQpvzPdK2UFL0xnpD3oHXiG8MfUdEiXg+stAoopH+hkc7QeymK4bClHTHGKoy5a18zmuZlAyUqDnhTa/zQDIHE2Lv7VgmuCTRkmQXhQwKUyK9sI5ZiYVKTTz6Gg/+Vfhhj2Zm7W+TGIDfu/LQ1yphBJB231Jyjhu3209gNdPuHPNTPXx30omktVZ9aWPj0PCM6sDQhjh3+sHS8QUpPYPQMbOHjqjWdEGoCVIUMXQ3JdZM+6tE5A9RK7pFPAseMKJhXMTEDw/OEpqcBpW3/+NJ+3oGJGjdebHD7xKbOWycUe84VNgYPIjm9Qkj2T5DA/stIAsd9mwyHSKrQu8w4miFuQVgIZWgVVAt8oxXZJJ8GwLQYJYaYNrG2uJ/22v4jy3OfBU+NBUFjpzJhiDoMR7ykjJcJ1b9fRkc7KXVR8DO3yrz+gSpGHz7TLQzHhDDkcXQ69WX6lNjwJbqJg5uOOtUTWxSCtSUt8VYnwFDJ9J329IltFH2RzJ5s=" />
+
+        <!--
+        Developers should always provide custom values for each of {YOUR_LABEL_NAME} and {YOUR_INTENT_NAME}.
+        Do not reuse HERE SDK defaults.
+        -->
+        <meta-data
+            android:name="INTENT_NAME"
+            android:value="multiplemaps.demo.INTENT_NAME" />
+
+        <service
+            android:name="com.here.android.mpa.service.MapService"
+            android:exported="false"
+            android:label="INTENT_NAME">
+            <intent-filter>
+                <action android:name="multiplemaps.demo.INTENT_NAME" />
+            </intent-filter>
+        </service>
+        <!--
+            Embed the HERE Positioning Service.
+            For more information, see the HERE SDK Developer's Guide
+        -->
+        <service
+            android:name="com.here.services.internal.LocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote"></service>
+
+    </application>
+
+</manifest>
