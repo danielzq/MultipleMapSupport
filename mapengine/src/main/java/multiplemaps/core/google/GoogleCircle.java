@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.Circle;
 import multiplemaps.core.EngineCircle;
 import multiplemaps.core.LatLng;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
@@ -26,6 +27,11 @@ public class GoogleCircle implements EngineCircle {
     @Override
     public void remove() {
         circle.remove();
+    }
+
+    @Override
+    public LatLng getCenter() {
+        return new LatLng(circle.getCenter().latitude, circle.getCenter().longitude);
     }
 
     @Override

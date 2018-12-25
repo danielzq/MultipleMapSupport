@@ -9,12 +9,17 @@ import multiplemaps.core.EngineMap;
 import multiplemaps.core.EngineMapFragment;
 import multiplemaps.core.OnEngineMapReadyCallback;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
 public class GoogleMapFragment extends SupportMapFragment implements EngineMapFragment, OnMapReadyCallback {
 
     private OnEngineMapReadyCallback onEngineMapReadyCallback;
+
+    public GoogleMapFragment() {
+        super();
+    }
 
     @Override
     public void getEngineMapAsync(OnEngineMapReadyCallback var1) {

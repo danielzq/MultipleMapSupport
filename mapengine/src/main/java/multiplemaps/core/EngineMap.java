@@ -1,6 +1,5 @@
 package multiplemaps.core;
 
-import android.support.annotation.RequiresPermission;
 import android.view.View;
 
 /**
@@ -9,6 +8,8 @@ import android.view.View;
 public interface EngineMap {
 
     void clear();
+
+    void stopAnimation();
 
     void setOnCameraMoveListener(OnCameraMoveListener listener);
 
@@ -30,7 +31,6 @@ public interface EngineMap {
 
     void setMyLocationButtonEnabled(boolean enabled);
 
-    @RequiresPermission(anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"})
     void setMyLocationEnabled(boolean enabled);
 
     void setIndoorLevelPickerEnabled(boolean enabled);
@@ -50,6 +50,8 @@ public interface EngineMap {
     void moveCamera(LatLng position, float zoomLevel);
 
     void animateCamera(LatLng position, float zoomLevel);
+
+    void animateCamera(LatLng position, CancelableCallback callback);
 
     void animateCamera(LatLngBounds position, int padding);
 

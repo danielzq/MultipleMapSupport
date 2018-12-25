@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
  */
 public interface EngineMapObject {
 
+    String getId();
+
     void setTag(@Nullable Object var1);
 
     Object getTag();

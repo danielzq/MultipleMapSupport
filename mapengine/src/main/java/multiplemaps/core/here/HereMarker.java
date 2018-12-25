@@ -15,6 +15,7 @@ import java.io.IOException;
 import multiplemaps.core.EngineMarker;
 import multiplemaps.core.LatLng;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
@@ -27,6 +28,8 @@ public class HereMarker implements EngineMarker {
     private Object tag;
 
     private String id;
+
+    private float x = 0.5f, y = 0.5f;
 
     public HereMarker(@NonNull String id, @NonNull MapMarker marker, @NonNull Map map) {
         this.marker = marker;
@@ -65,6 +68,8 @@ public class HereMarker implements EngineMarker {
 
     @Override
     public void setAnchor(@FloatRange(from = 0f, to = 1f) float x, @FloatRange(from = 0f, to = 1f) float y) {
+        this.x = x;
+        this.y = y;
         Image image = marker.getIcon();
         if (image != null) {
             PointF pointF = new PointF(image.getWidth() * x, image.getHeight() * y);
@@ -81,6 +86,7 @@ public class HereMarker implements EngineMarker {
             e.printStackTrace();
         }
         marker.setIcon(image);
+        setAnchor(x, y);
     }
 
     @Override

@@ -11,8 +11,9 @@ public class EngineMarkerOptions {
 
     private LatLng position;
     private String title, snippet;
-    private float anchorX, anchorY;
+    private float anchorX = 0.5f, anchorY = 0.5f;
     private int iconRes;
+    private boolean isFlat;
 
     public final EngineMarkerOptions position(@NonNull LatLng position) {
         if (position == null) {
@@ -44,6 +45,11 @@ public class EngineMarkerOptions {
         return this;
     }
 
+    public final EngineMarkerOptions flat(boolean enableFlat) {
+        isFlat = enableFlat;
+        return this;
+    }
+
     public LatLng getPosition() {
         return position;
     }
@@ -66,5 +72,9 @@ public class EngineMarkerOptions {
 
     public int getIconRes() {
         return iconRes;
+    }
+
+    public boolean isFlat() {
+        return isFlat;
     }
 }

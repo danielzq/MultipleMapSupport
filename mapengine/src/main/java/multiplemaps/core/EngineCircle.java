@@ -5,9 +5,9 @@ package multiplemaps.core;
  */
 public interface EngineCircle extends EngineMapObject {
 
-    String getId();
-
     void remove();
+
+    LatLng getCenter();
 
     void setCenter(LatLng var1);
 

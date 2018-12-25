@@ -28,6 +28,7 @@ import multiplemaps.core.EnginePolygonOptions;
 import multiplemaps.core.LatLngBounds;
 import multiplemaps.core.Projection;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
@@ -58,6 +59,11 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public void clear() {
         map.clear();
+    }
+
+    @Override
+    public void stopAnimation() {
+        map.stopAnimation();
     }
 
     @Override
@@ -162,7 +168,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public CameraPosition getCameraPosition() {
         CameraPosition cameraPosition = new CameraPosition();
-        cameraPosition.target = new multiplemaps.core.LatLng(map.getCameraPosition().target.latitude, map.getCameraPosition().target.longitude);
+        cameraPosition.target = new stationdm.mapcore.LatLng(map.getCameraPosition().target.latitude, map.getCameraPosition().target.longitude);
         cameraPosition.zoom = map.getCameraPosition().zoom;
         cameraPosition.bearing = map.getCameraPosition().bearing;
         cameraPosition.tilt = map.getCameraPosition().tilt;
@@ -175,19 +181,38 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     }
 
     @Override
-    public void moveCamera(multiplemaps.core.LatLng position, float zoomLevel) {
+    public void moveCamera(stationdm.mapcore.LatLng position, float zoomLevel) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(position.latitude, position.longitude), zoomLevel));
     }
 
     @Override
-    public void animateCamera(multiplemaps.core.LatLng position, float zoomLevel) {
+    public void animateCamera(stationdm.mapcore.LatLng position, float zoomLevel) {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(position.latitude, position.longitude), zoomLevel));
+    }
+
+    @Override
+    public void animateCamera(stationdm.mapcore.LatLng position, final CancelableCallback callback) {
+        map.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(position.latitude, position.longitude)), new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                if (callback != null) {
+                    callback.onFinish();
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                if (callback != null) {
+                    callback.onCancel();
+                }
+            }
+        });
     }
 
     @Override
     public void animateCamera(LatLngBounds latLngBounds, int padding) {
         com.google.android.gms.maps.model.LatLngBounds.Builder bounds = new com.google.android.gms.maps.model.LatLngBounds.Builder();
-        for (multiplemaps.core.LatLng latLng : latLngBounds.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng : latLngBounds.getPoints()) {
             bounds.include(new LatLng(latLng.latitude, latLng.longitude));
         }
         map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), padding));
@@ -199,7 +224,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     }
 
     @Override
-    public void animateCamera(multiplemaps.core.LatLng position, float zoomLevel, final CancelableCallback callback) {
+    public void animateCamera(stationdm.mapcore.LatLng position, float zoomLevel, final CancelableCallback callback) {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(position.latitude, position.longitude), zoomLevel), new GoogleMap.CancelableCallback() {
             @Override
             public void onFinish() {
@@ -220,7 +245,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public void animateCamera(LatLngBounds latLngBounds, int padding, final CancelableCallback callback) {
         com.google.android.gms.maps.model.LatLngBounds.Builder bounds = new com.google.android.gms.maps.model.LatLngBounds.Builder();
-        for (multiplemaps.core.LatLng latLng : latLngBounds.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng : latLngBounds.getPoints()) {
             bounds.include(new LatLng(latLng.latitude, latLng.longitude));
         }
         map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), padding), new GoogleMap.CancelableCallback() {
@@ -243,7 +268,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public void animateCamera(LatLngBounds latLngBounds, int width, int height, int padding) {
         com.google.android.gms.maps.model.LatLngBounds.Builder bounds = new com.google.android.gms.maps.model.LatLngBounds.Builder();
-        for (multiplemaps.core.LatLng latLng : latLngBounds.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng : latLngBounds.getPoints()) {
             bounds.include(new LatLng(latLng.latitude, latLng.longitude));
         }
         map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, height, padding));
@@ -252,7 +277,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public void moveCamera(LatLngBounds latLngBounds, int width, int height, int padding) {
         com.google.android.gms.maps.model.LatLngBounds.Builder bounds = new com.google.android.gms.maps.model.LatLngBounds.Builder();
-        for (multiplemaps.core.LatLng latLng : latLngBounds.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng : latLngBounds.getPoints()) {
             bounds.include(new LatLng(latLng.latitude, latLng.longitude));
         }
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, height, padding));
@@ -279,6 +304,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
                 .title(var1.getTitle())
                 .position(new LatLng(var1.getPosition().latitude, var1.getPosition().longitude))
                 .snippet(var1.getSnippet())
+                .flat(var1.isFlat())
                 .icon(BitmapDescriptorFactory.fromResource(var1.getIconRes()))
                 .anchor(var1.getAnchorX(), var1.getAnchorY())
         );
@@ -289,7 +315,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public EnginePolygon addPolygon(EnginePolygonOptions var1) {
         ArrayList<LatLng> list = new ArrayList<>();
-        for (multiplemaps.core.LatLng latLng:var1.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng:var1.getPoints()) {
             list.add(new LatLng(latLng.latitude, latLng.longitude));
         }
         Polygon polygon = map.addPolygon(new PolygonOptions()
@@ -309,7 +335,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
 
     @Override
     public void onMapClick(LatLng latLng) {
-        onMapClickListener.onMapClick(new multiplemaps.core.LatLng(latLng.latitude, latLng.longitude));
+        onMapClickListener.onMapClick(new stationdm.mapcore.LatLng(latLng.latitude, latLng.longitude));
     }
 
     @Override

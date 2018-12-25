@@ -2,9 +2,15 @@ package multiplemaps.core.here;
 
 import android.support.annotation.Nullable;
 
+import com.here.android.mpa.common.GeoCoordinate;
+import com.here.android.mpa.common.GeoPolygon;
 import com.here.android.mpa.mapping.MapPolygon;
 
+import java.util.List;
+
 import multiplemaps.core.EnginePolygon;
+import multiplemaps.core.LatLng;
+
 
 /**
  * Created by Daniel on 2018/11/15.
@@ -25,6 +31,15 @@ public class HerePolygon implements EnginePolygon {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public void setPoints(List<LatLng> points) {
+        GeoPolygon geoPolygon = new GeoPolygon();
+        for (LatLng latLng : points) {
+            geoPolygon.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
+        }
+        polygon.setGeoPolygon(geoPolygon);
     }
 
     @Override

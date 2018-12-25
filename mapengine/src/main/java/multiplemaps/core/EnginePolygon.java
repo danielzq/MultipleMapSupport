@@ -1,11 +1,13 @@
 package multiplemaps.core;
 
+import java.util.List;
+
 /**
  * Created by Daniel on 2018/11/15.
  */
 public interface EnginePolygon extends EngineMapObject {
 
-    String getId();
+    void setPoints(List<LatLng> points);
 
     void setFillColor(int color);
 

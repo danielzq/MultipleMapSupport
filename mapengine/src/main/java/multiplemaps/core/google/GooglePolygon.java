@@ -4,7 +4,12 @@ import android.support.annotation.Nullable;
 
 import com.google.android.gms.maps.model.Polygon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import multiplemaps.core.EnginePolygon;
+import multiplemaps.core.LatLng;
+
 
 /**
  * Created by Daniel on 2018/11/15.
@@ -20,6 +25,15 @@ public class GooglePolygon implements EnginePolygon {
     @Override
     public String getId() {
         return polygon.getId();
+    }
+
+    @Override
+    public void setPoints(List<LatLng> points) {
+        ArrayList<com.google.android.gms.maps.model.LatLng> list = new ArrayList<>();
+        for (LatLng latLng : points) {
+            list.add(new com.google.android.gms.maps.model.LatLng(latLng.latitude, latLng.longitude));
+        }
+        polygon.setPoints(list);
     }
 
     @Override

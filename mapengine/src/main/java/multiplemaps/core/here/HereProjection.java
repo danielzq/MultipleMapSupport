@@ -9,6 +9,7 @@ import com.here.android.mpa.mapping.Map;
 import multiplemaps.core.LatLng;
 import multiplemaps.core.Projection;
 
+
 /**
  * Created by Daniel on 2018/11/14.
  */
@@ -29,6 +30,9 @@ public class HereProjection implements Projection {
     @Override
     public LatLng fromScreenLocation(Point var1) {
         GeoCoordinate geoCoordinate = map.pixelToGeo(new PointF(var1.x, var1.y));
-        return new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude());
+        if (geoCoordinate != null) {
+            return new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude());
+        }
+        return null;
     }
 }

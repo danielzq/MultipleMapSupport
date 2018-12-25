@@ -9,6 +9,7 @@ import com.here.android.mpa.mapping.MapCircle;
 import multiplemaps.core.EngineCircle;
 import multiplemaps.core.LatLng;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
@@ -36,6 +37,11 @@ public class HereCircle implements EngineCircle {
     @Override
     public void remove() {
         map.removeMapObject(circle);
+    }
+
+    @Override
+    public LatLng getCenter() {
+        return new LatLng(circle.getCenter().getLatitude(), circle.getCenter().getLongitude());
     }
 
     @Override

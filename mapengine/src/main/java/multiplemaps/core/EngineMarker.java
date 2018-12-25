@@ -5,8 +5,6 @@ package multiplemaps.core;
  */
 public interface EngineMarker extends EngineMapObject {
 
-    String getId();
-
     String getTitle();
 
     void setTitle(String title);

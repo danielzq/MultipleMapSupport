@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 
-import com.here.android.mpa.common.MapEngine;
 import com.here.android.mpa.common.OnEngineInitListener;
 import com.here.android.mpa.common.PositioningManager;
 import com.here.android.mpa.mapping.Map;
-import com.here.android.mpa.mapping.MapFragment;
+import com.here.android.mpa.mapping.SupportMapFragment;
 
 import java.io.File;
 
@@ -18,14 +17,17 @@ import multiplemaps.core.EngineMap;
 import multiplemaps.core.EngineMapFragment;
 import multiplemaps.core.OnEngineMapReadyCallback;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
-public class HereMapFragment extends MapFragment implements EngineMapFragment, OnEngineInitListener {
+public class HereMapFragment extends SupportMapFragment implements EngineMapFragment, OnEngineInitListener {
 
     private OnEngineMapReadyCallback onEngineMapReadyCallback;
 
-    private MapEngine mapEngine;
+    public HereMapFragment() {
+        super();
+    }
 
     @Override
     public void getEngineMapAsync(OnEngineMapReadyCallback var1) {

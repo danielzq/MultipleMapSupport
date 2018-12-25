@@ -15,12 +15,12 @@ import com.here.android.mpa.common.PositioningManager;
 import com.here.android.mpa.common.ViewObject;
 import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapCircle;
-import com.here.android.mpa.mapping.MapFragment;
 import com.here.android.mpa.mapping.MapGesture;
 import com.here.android.mpa.mapping.MapMarker;
 import com.here.android.mpa.mapping.MapObject;
 import com.here.android.mpa.mapping.MapPolygon;
 import com.here.android.mpa.mapping.MapState;
+import com.here.android.mpa.mapping.SupportMapFragment;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -42,6 +42,7 @@ import multiplemaps.core.LatLngBounds;
 import multiplemaps.core.Projection;
 import multiplemaps.core.R;
 
+
 /**
  * Created by Daniel on 2018/11/13.
  */
@@ -49,7 +50,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     private Map map;
 
-    private MapFragment mapFragment;
+    private SupportMapFragment mapFragment;
 
     private HashMap<String, EngineMapObject> mapObjects = new HashMap<>();
 
@@ -73,9 +74,22 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     private boolean cameraMoving;
 
-    public HereEngineMap(@NonNull Map map, @NonNull MapFragment mapFragment) {
+    public HereEngineMap(@NonNull Map map, @NonNull SupportMapFragment mapFragment) {
         this.map = map;
         this.mapFragment = mapFragment;
+    }
+
+    private void clearFromId(String id) {
+        if (mapObjects.containsKey(id)) {
+            MapObject mapObject = (MapObject) mapObjects.get(id).getMapObject();
+            map.removeMapObject(mapObject);
+            mapObjects.remove(id);
+        }
+    }
+
+    private void addMapObject(String id, MapObject var1) {
+        clearFromId(id);
+        map.addMapObject(var1);
     }
 
     @Override
@@ -87,6 +101,10 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         list.addAll(list);
         map.removeMapObjects(list);
         mapObjects.clear();
+    }
+
+    @Override
+    public void stopAnimation() {
     }
 
     @Override
@@ -186,6 +204,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
     @Override
     public void setOnMarkerClickListener(OnMarkerClickListener listener) {
         onMarkerClickListener = listener;
+        map.addTransformListener(this);
         mapFragment.getMapGesture().addOnGestureListener(onGestureListener, 2, false);
     }
 
@@ -227,6 +246,13 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
     @Override
     public void animateCamera(LatLng position, float zoomLevel) {
         map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW, zoomLevel, Map.MOVE_PRESERVE_ORIENTATION, Map.MOVE_PRESERVE_TILT);
+    }
+
+    @Override
+    public void animateCamera(LatLng position, CancelableCallback callback) {
+        map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW);
+        cancelableCallback = callback;
+        cameraMoving = true;
     }
 
     @Override
@@ -296,8 +322,8 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         circle.setRadius(var1.getRadius());
         circle.setLineWidth((int) var1.getStrokeWidth());
         circle.setZIndex(mapObjects.size());
-        map.addMapObject(circle);
         EngineCircle engineCircle = new HereCircle(geoCoordinate.toString(), circle, map);
+        addMapObject(engineCircle.getId(), circle);
         mapObjects.put(engineCircle.getId(), engineCircle);
         return engineCircle;
     }
@@ -314,10 +340,9 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         MapMarker marker = new MapMarker(geoCoordinate, image);
         marker.setTitle(var1.getTitle());
         marker.setDescription(var1.getSnippet());
-        marker.setAnchorPoint(new PointF(image.getWidth()/2, image.getHeight()));
         marker.setZIndex(mapObjects.size());
-        map.addMapObject(marker);
         EngineMarker engineMarker = new HereMarker(geoCoordinate.toString(), marker, map);
+        addMapObject(engineMarker.getId(), marker);
         mapObjects.put(engineMarker.getId(), engineMarker);
         return engineMarker;
     }
@@ -326,7 +351,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
     public EnginePolygon addPolygon(EnginePolygonOptions var1) {
         List<GeoCoordinate> coordinates = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        for (multiplemaps.core.LatLng latLng:var1.getPoints()) {
+        for (stationdm.mapcore.LatLng latLng:var1.getPoints()) {
             GeoCoordinate geoCoordinate = new GeoCoordinate(latLng.latitude, latLng.longitude);
             coordinates.add(geoCoordinate);
             stringBuilder.append(geoCoordinate.toString());
@@ -337,8 +362,8 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         m_polygon.setFillColor(var1.getFillColor());
         m_polygon.setLineWidth((int) var1.getStrokeWidth());
         m_polygon.setZIndex(mapObjects.size());
-        map.addMapObject(m_polygon);
         EnginePolygon enginePolygon = new HerePolygon(stringBuilder.toString(), m_polygon);
+        addMapObject(enginePolygon.getId(), m_polygon);
         mapObjects.put(enginePolygon.getId(), enginePolygon);
         return enginePolygon;
     }
