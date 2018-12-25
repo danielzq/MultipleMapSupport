@@ -351,7 +351,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
     public EnginePolygon addPolygon(EnginePolygonOptions var1) {
         List<GeoCoordinate> coordinates = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        for (stationdm.mapcore.LatLng latLng:var1.getPoints()) {
+        for (LatLng latLng:var1.getPoints()) {
             GeoCoordinate geoCoordinate = new GeoCoordinate(latLng.latitude, latLng.longitude);
             coordinates.add(geoCoordinate);
             stringBuilder.append(geoCoordinate.toString());
