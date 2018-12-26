@@ -1,1 +1,1 @@
-include ':app', ':mapengine'
+include ':app', ':local_mapengine', ':jcenter_mapengine'
