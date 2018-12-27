@@ -1,6 +1,6 @@
 Multiple Map (Here & Google)
 ======
-[![](https://jitpack.io/v/danielzq/MultipleMapSupport.svg)](https://jitpack.io/#danielzq/MultipleMapSupport)
+[![](https://jitpack.io/v/danielzq/MultipleMapSupport.svg)](https://jitpack.io/#danielzq/MultipleMapSupport)[ ![Download](https://api.bintray.com/packages/zq26zhangqi/maven/MultipleMapSupport/images/download.svg) ](https://bintray.com/zq26zhangqi/maven/MultipleMapSupport/_latestVersion)
 
 Download
 --------
