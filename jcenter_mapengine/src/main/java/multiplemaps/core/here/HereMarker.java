@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.common.Image;
@@ -11,6 +12,7 @@ import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapMarker;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import multiplemaps.core.EngineMarker;
 import multiplemaps.core.LatLng;
@@ -32,9 +34,15 @@ public class HereMarker implements EngineMarker {
     private float x = 0.5f, y = 0.5f;
 
     public HereMarker(@NonNull String id, @NonNull MapMarker marker, @NonNull Map map) {
+        byte[] data = new byte[0];
+        try {
+            data = (HereMarker.class.getSimpleName() + id).getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.id = Base64.encodeToString(data, Base64.NO_PADDING);
         this.marker = marker;
         this.map = map;
-        this.id = HereMarker.class.getSimpleName() + id;
     }
 
     public MapMarker getMarker() {

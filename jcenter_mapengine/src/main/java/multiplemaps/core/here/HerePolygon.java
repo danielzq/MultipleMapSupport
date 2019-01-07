@@ -1,11 +1,13 @@
 package multiplemaps.core.here;
 
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.common.GeoPolygon;
 import com.here.android.mpa.mapping.MapPolygon;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import multiplemaps.core.EnginePolygon;
@@ -24,7 +26,13 @@ public class HerePolygon implements EnginePolygon {
     private Object tag;
 
     public HerePolygon(String id, MapPolygon polygon) {
-        this.id = HerePolygon.class.getSimpleName() + id;
+        byte[] data = new byte[0];
+        try {
+            data = (HerePolygon.class.getSimpleName() + id).getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.id = Base64.encodeToString(data, Base64.NO_PADDING);
         this.polygon = polygon;
     }
 

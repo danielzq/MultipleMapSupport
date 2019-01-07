@@ -1,10 +1,13 @@
 package multiplemaps.core.here;
 
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapCircle;
+
+import java.io.UnsupportedEncodingException;
 
 import multiplemaps.core.EngineCircle;
 import multiplemaps.core.LatLng;
@@ -24,7 +27,13 @@ public class HereCircle implements EngineCircle {
     private Object tag;
 
     public HereCircle(String id, MapCircle circle, Map map) {
-        this.id = HereCircle.class.getSimpleName() + id;
+        byte[] data = new byte[0];
+        try {
+            data = (HereCircle.class.getSimpleName() + id).getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.id = Base64.encodeToString(data, Base64.NO_PADDING);
         this.circle = circle;
         this.map = map;
     }

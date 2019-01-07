@@ -341,7 +341,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         marker.setTitle(var1.getTitle());
         marker.setDescription(var1.getSnippet());
         marker.setZIndex(mapObjects.size());
-        EngineMarker engineMarker = new HereMarker(geoCoordinate.toString(), marker, map);
+        EngineMarker engineMarker = new HereMarker(marker.getTitle() + geoCoordinate.toString(), marker, map);
         addMapObject(engineMarker.getId(), marker);
         mapObjects.put(engineMarker.getId(), engineMarker);
         return engineMarker;
@@ -430,7 +430,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
                     MapObject mapObject = (MapObject) viewObject;
                     if (mapObject.getType() == MapObject.Type.MARKER) {
                         MapMarker window_marker = ((MapMarker) mapObject);
-                        EngineMarker tmpMarker = new HereMarker(window_marker.getCoordinate().toString(), window_marker, map);
+                        EngineMarker tmpMarker = new HereMarker(window_marker.getTitle() + window_marker.getCoordinate().toString(), window_marker, map);
                         if (mapObjects.containsKey(tmpMarker.getId())) {
                             EngineMarker realMarker = (EngineMarker) mapObjects.get(tmpMarker.getId());
                             onMarkerClickListener.onMarkerClick(realMarker);
