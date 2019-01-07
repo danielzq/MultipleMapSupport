@@ -18,7 +18,7 @@ Download
 2. Configure this dependency to your app build.gradle:
 
 ```
-    implementation 'com.github.danielzq:MultipleMapSupport:1.0.7'
+    implementation 'com.github.danielzq:MultipleMapSupport:1.0.8'
 ```
 
 
