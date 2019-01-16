@@ -10,6 +10,7 @@ Download
         repositories {
         ...
             maven { url 'https://jitpack.io' }
+            maven { url 'https://dl.bintray.com/zq26zhangqi/MultipleMapSupport' }
         }
     }
 ```
