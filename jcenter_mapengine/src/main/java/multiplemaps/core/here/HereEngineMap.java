@@ -240,17 +240,29 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     @Override
     public void moveCamera(LatLng position, float zoomLevel) {
-        map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.NONE, zoomLevel, Map.MOVE_PRESERVE_ORIENTATION, Map.MOVE_PRESERVE_TILT);
+        try {
+            map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.NONE, zoomLevel, Map.MOVE_PRESERVE_ORIENTATION, Map.MOVE_PRESERVE_TILT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void animateCamera(LatLng position, float zoomLevel) {
-        map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW, zoomLevel, Map.MOVE_PRESERVE_ORIENTATION, Map.MOVE_PRESERVE_TILT);
+        try {
+            map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW, zoomLevel, Map.MOVE_PRESERVE_ORIENTATION, Map.MOVE_PRESERVE_TILT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void animateCamera(LatLng position, CancelableCallback callback) {
-        map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW);
+        try {
+            map.setCenter(new GeoCoordinate(position.latitude, position.longitude), Map.Animation.BOW);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         cancelableCallback = callback;
         cameraMoving = true;
     }
@@ -262,7 +274,11 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
             list.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
         }
         GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
-        map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        try {
+            map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -287,7 +303,11 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
             list.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
         }
         GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
-        map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        try {
+            map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         cancelableCallback = callback;
         cameraMoving = true;
     }
@@ -299,7 +319,11 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
             list.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
         }
         GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
-        map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        try {
+            map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -309,7 +333,11 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
             list.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
         }
         GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
-        map.zoomTo(boundingBox, width, height, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        try {
+            map.zoomTo(boundingBox, width, height, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
