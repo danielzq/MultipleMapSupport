@@ -10,7 +10,6 @@ Download
         repositories {
         ...
             maven { url 'https://jitpack.io' }
-            maven { url 'https://dl.bintray.com/zq26zhangqi/MultipleMapSupport' }
         }
     }
 ```
@@ -18,7 +17,7 @@ Download
 2. Configure this dependency to your app build.gradle:
 
 ```
-    implementation 'com.github.danielzq:MultipleMapSupport:1.0.8'
+    implementation 'com.github.danielzq:MultipleMapSupport:1.0.9'
 ```
 
 
