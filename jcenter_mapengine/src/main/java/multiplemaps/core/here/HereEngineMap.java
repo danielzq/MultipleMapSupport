@@ -188,12 +188,19 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
             mapFragment.getPositionIndicator().setMarker(image);
             mapFragment.getPositionIndicator().setZIndex(0);
         }
-        PositioningManager positioningManager = PositioningManager.getInstance();
-        if (enabled) {
-            positioningManager.addListener(new WeakReference<PositioningManager.OnPositionChangedListener>(this));
-            positioningManager.start(PositioningManager.LocationMethod.GPS_NETWORK_INDOOR);
-        } else {
-            positioningManager.stop();
+
+        try {
+            PositioningManager positioningManager = PositioningManager.getInstance();
+            if (enabled) {
+                positioningManager.addListener(new WeakReference<PositioningManager.OnPositionChangedListener>(this));
+                positioningManager.start(PositioningManager.LocationMethod.GPS_NETWORK_INDOOR);
+            } else {
+                if (positioningManager.isActive()) {
+                    positioningManager.stop();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -379,7 +386,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
     public EnginePolygon addPolygon(EnginePolygonOptions var1) {
         List<GeoCoordinate> coordinates = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
-        for (LatLng latLng:var1.getPoints()) {
+        for (LatLng latLng : var1.getPoints()) {
             GeoCoordinate geoCoordinate = new GeoCoordinate(latLng.latitude, latLng.longitude);
             coordinates.add(geoCoordinate);
             stringBuilder.append(geoCoordinate.toString());

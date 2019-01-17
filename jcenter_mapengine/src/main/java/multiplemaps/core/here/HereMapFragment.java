@@ -76,6 +76,12 @@ public class HereMapFragment extends SupportMapFragment implements EngineMapFrag
     @Override
     public void onDestroy() {
         super.onDestroy();
-        PositioningManager.getInstance().stop();
+        try {
+            if (PositioningManager.getInstance().isActive()) {
+                PositioningManager.getInstance().stop();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
