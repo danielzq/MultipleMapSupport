@@ -466,7 +466,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
                     if (mapObject.getType() == MapObject.Type.MARKER) {
                         MapMarker window_marker = ((MapMarker) mapObject);
                         EngineMarker tmpMarker = new HereMarker(window_marker.getTitle() + window_marker.getCoordinate().toString(), window_marker, map);
-                        if (mapObjects.containsKey(tmpMarker.getId())) {
+                        if (mapObjects.containsKey(tmpMarker.getId()) && onMarkerClickListener != null) {
                             EngineMarker realMarker = (EngineMarker) mapObjects.get(tmpMarker.getId());
                             onMarkerClickListener.onMarkerClick(realMarker);
                         }
@@ -479,8 +479,10 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
         @Override
         public boolean onTapEvent(final PointF pointF) {
-            GeoCoordinate geoCoordinate = HereEngineMap.this.map.pixelToGeo(pointF);
-            onMapClickListener.onMapClick(new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude()));
+            if (onMapClickListener != null) {
+                GeoCoordinate geoCoordinate = HereEngineMap.this.map.pixelToGeo(pointF);
+                onMapClickListener.onMapClick(new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude()));
+            }
             return false;
         }
 

@@ -150,12 +150,18 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
-                return GoogleEngineMap.this.infoWindowAdapter.getInfoWindow(new GoogleMarker(marker));
+                if (GoogleEngineMap.this.infoWindowAdapter != null) {
+                    return GoogleEngineMap.this.infoWindowAdapter.getInfoWindow(new GoogleMarker(marker));
+                }
+                return null;
             }
 
             @Override
             public View getInfoContents(Marker marker) {
-                return GoogleEngineMap.this.infoWindowAdapter.getInfoContents(new GoogleMarker(marker));
+                if (GoogleEngineMap.this.infoWindowAdapter != null) {
+                    return GoogleEngineMap.this.infoWindowAdapter.getInfoContents(new GoogleMarker(marker));
+                }
+                return null;
             }
         });
     }
@@ -329,37 +335,52 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        EngineMarker engineMarker = new GoogleMarker(marker);
-        return onMarkerClickListener.onMarkerClick(engineMarker);
+        if (onMarkerClickListener != null) {
+            EngineMarker engineMarker = new GoogleMarker(marker);
+            return onMarkerClickListener.onMarkerClick(engineMarker);
+        }
+        return false;
     }
 
     @Override
     public void onMapClick(com.google.android.gms.maps.model.LatLng latLng) {
-        onMapClickListener.onMapClick(new LatLng(latLng.latitude, latLng.longitude));
+        if (onMapClickListener != null) {
+            onMapClickListener.onMapClick(new LatLng(latLng.latitude, latLng.longitude));
+        }
     }
 
     @Override
     public void onCameraMove() {
-        onCameraMoveListener.onCameraMove();
+        if (onCameraMoveListener != null) {
+            onCameraMoveListener.onCameraMove();
+        }
     }
 
     @Override
     public void onCameraIdle() {
-        onCameraIdleListener.onCameraIdle();
+        if (onCameraIdleListener != null) {
+            onCameraIdleListener.onCameraIdle();
+        }
     }
 
     @Override
     public void onCameraMoveStarted(int i) {
-        onCameraMoveStartedListener.onCameraMoveStarted(i);
+        if (onCameraMoveStartedListener != null) {
+            onCameraMoveStartedListener.onCameraMoveStarted(i);
+        }
     }
 
     @Override
     public void onCameraMoveCanceled() {
-        onCameraMoveCanceledListener.onCameraMoveCanceled();
+        if (onCameraMoveCanceledListener != null) {
+            onCameraMoveCanceledListener.onCameraMoveCanceled();
+        }
     }
 
     @Override
     public void onMapLoaded() {
-        onMapLoadedCallback.onMapLoaded();
+        if (onMapLoadedCallback != null) {
+            onMapLoadedCallback.onMapLoaded();
+        }
     }
 }
