@@ -1,6 +1,6 @@
 Multiple Map (Here & Google)
 ======
-[![](https://jitpack.io/v/danielzq/MultipleMapSupport.svg)](https://jitpack.io/#danielzq/MultipleMapSupport)[ ![Download](https://api.bintray.com/packages/zq26zhangqi/maven/MultipleMapSupport/images/download.svg) ](https://bintray.com/zq26zhangqi/maven/MultipleMapSupport/_latestVersion)
+[![](https://jitpack.io/v/danielzq/MultipleMapSupport.svg)](https://jitpack.io/#danielzq/MultipleMapSupport)
 
 Download
 --------
@@ -18,7 +18,7 @@ Download
 2. Configure this dependency to your app build.gradle:
 
 ```
-    implementation 'com.github.danielzq:MultipleMapSupport:1.0.9'
+    implementation 'com.github.danielzq:MultipleMapSupport:1.0.11'
 ```
 
 
