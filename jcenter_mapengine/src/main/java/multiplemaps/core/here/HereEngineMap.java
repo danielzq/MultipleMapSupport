@@ -479,9 +479,15 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
         @Override
         public boolean onTapEvent(final PointF pointF) {
-            if (onMapClickListener != null) {
-                GeoCoordinate geoCoordinate = HereEngineMap.this.map.pixelToGeo(pointF);
-                onMapClickListener.onMapClick(new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude()));
+            try {
+                if (onMapClickListener != null) {
+                    GeoCoordinate geoCoordinate = HereEngineMap.this.map.pixelToGeo(pointF);
+                    if (geoCoordinate != null) {
+                        onMapClickListener.onMapClick(new LatLng(geoCoordinate.getLatitude(), geoCoordinate.getLongitude()));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return false;
         }
