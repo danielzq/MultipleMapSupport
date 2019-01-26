@@ -43,9 +43,9 @@ dependencies {
 publish {
     userOrg = 'zq26zhangqi'      // bintray注册的用户名
     groupId = 'com.github.danielzq'
-    desc = 'v1.0.11 Release'
+    desc = 'v1.0.12 Release'
     artifactId = 'MultipleMapSupport'// bintray创建的package
-    publishVersion = '1.0.11'
+    publishVersion = '1.0.12'
 }
 
 
