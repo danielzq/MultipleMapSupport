@@ -21,4 +21,14 @@ public class EngineMapFragmentManager {
         }
         return null;
     }
+
+    public static EngineMapFragment findFragment(Fragment f, int id) {
+        Fragment fragment = f.getChildFragmentManager().findFragmentById(id);
+        if (fragment instanceof GoogleMapFragment) {
+            return (GoogleMapFragment)fragment;
+        } else if (fragment instanceof HereMapFragment) {
+            return (HereMapFragment)fragment;
+        }
+        return null;
+    }
 }
