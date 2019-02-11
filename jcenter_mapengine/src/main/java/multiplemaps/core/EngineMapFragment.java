@@ -6,4 +6,6 @@ package multiplemaps.core;
 public interface EngineMapFragment {
 
     void getEngineMapAsync(OnEngineMapReadyCallback var1);
+
+    void setCopyrightMargin(int margin);
 }

@@ -17,6 +17,8 @@ public class GoogleMapFragment extends SupportMapFragment implements EngineMapFr
 
     private OnEngineMapReadyCallback onEngineMapReadyCallback;
 
+    private int margin;
+
     public GoogleMapFragment() {
         super();
     }
@@ -29,7 +31,13 @@ public class GoogleMapFragment extends SupportMapFragment implements EngineMapFr
     }
 
     @Override
+    public void setCopyrightMargin(int margin) {
+        this.margin = margin;
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
+        googleMap.setPadding(margin, margin, margin, margin);
         EngineMap engineMap = new GoogleEngineMap(googleMap);
         if (onEngineMapReadyCallback != null) {
             onEngineMapReadyCallback.onMapReady(engineMap);

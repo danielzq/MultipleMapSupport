@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnEngineMapReadyC
         checkPermissions();
         EngineMapFragment fragment = EngineMapFragmentManager.findFragment(this, R.id.map);
         fragment.getEngineMapAsync(this);
+        fragment.setCopyrightMargin(50);
     }
 
     @Override

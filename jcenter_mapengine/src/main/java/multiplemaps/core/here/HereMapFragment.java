@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 
+import com.here.android.mpa.common.CopyrightLogoPosition;
 import com.here.android.mpa.common.OnEngineInitListener;
 import com.here.android.mpa.common.PositioningManager;
 import com.here.android.mpa.mapping.Map;
@@ -32,6 +33,7 @@ public class HereMapFragment extends SupportMapFragment implements EngineMapFrag
     @Override
     public void getEngineMapAsync(OnEngineMapReadyCallback var1) {
         onEngineMapReadyCallback = var1;
+        setCopyrightLogoPosition(CopyrightLogoPosition.BOTTOM_LEFT);
         setRetainInstance(false);
 //        mapEngine = MapEngine.getInstance();
 //        ApplicationContext appContext = new ApplicationContext(getActivity().getApplicationContext());
