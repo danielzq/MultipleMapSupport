@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity implements OnEngineMapReadyC
         checkPermissions();
         EngineMapFragment fragment = EngineMapFragmentManager.findFragment(this, R.id.map);
         fragment.getEngineMapAsync(this);
-        fragment.setCopyrightMargin(50);
     }
 
     @Override
     public void onMapReady(EngineMap map) {
         this.map = map;
+        map.setPadding(50, 50, 50, 150);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }

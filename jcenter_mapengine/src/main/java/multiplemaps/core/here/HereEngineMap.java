@@ -1,6 +1,7 @@
 package multiplemaps.core.here;
 
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.view.MotionEvent;
@@ -228,6 +229,15 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
+        if (mapFragment != null && mapFragment.getView() != null) {
+            int width = mapFragment.getView().getWidth();
+            int height = mapFragment.getView().getHeight();
+            try {
+                mapFragment.setCopyrightBoundaryRect(new Rect(left, top, width - right, height - bottom));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
