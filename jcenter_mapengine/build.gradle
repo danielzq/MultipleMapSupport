@@ -31,21 +31,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.danielzq:HERE-sdk:1.0.0'
+    implementation 'com.github.danielzq:HERE-sdk:1.0.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "com.android.support:support-v4:28.0.0"
     implementation "com.android.support:design:28.0.0"
     implementation "com.android.support:appcompat-v7:28.0.0"
-    implementation "com.google.android.gms:play-services-maps:16.0.0"
+    implementation "com.google.android.gms:play-services-maps:16.1.0"
     implementation "com.google.android.gms:play-services-location:16.0.0"
 }
 
 publish {
     userOrg = 'zq26zhangqi'      // bintray注册的用户名
     groupId = 'com.github.danielzq'
-    desc = 'v1.0.15 Release'
+    desc = 'v1.0.16 Release'
     artifactId = 'MultipleMapSupport'// bintray创建的package
-    publishVersion = '1.0.15'
+    publishVersion = '1.0.16'
 }
 
 
