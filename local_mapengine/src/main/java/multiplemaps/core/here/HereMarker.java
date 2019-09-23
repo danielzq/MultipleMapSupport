@@ -1,9 +1,9 @@
 package multiplemaps.core.here;
 
 import android.graphics.PointF;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.common.Image;

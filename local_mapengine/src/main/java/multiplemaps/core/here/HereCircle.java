@@ -1,6 +1,6 @@
 package multiplemaps.core.here;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.here.android.mpa.common.GeoCoordinate;
 import com.here.android.mpa.mapping.Map;

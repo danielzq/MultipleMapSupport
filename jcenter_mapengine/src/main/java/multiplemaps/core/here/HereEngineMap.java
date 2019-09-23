@@ -2,10 +2,11 @@ package multiplemaps.core.here;
 
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 
 import com.here.android.mpa.common.GeoBoundingBox;
 import com.here.android.mpa.common.GeoCoordinate;

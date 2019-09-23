@@ -1,8 +1,8 @@
 package multiplemaps.core.here;
 
 import android.graphics.PointF;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import android.view.MotionEvent;
 import android.view.View;
 

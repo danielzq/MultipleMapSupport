@@ -1,6 +1,6 @@
 package multiplemaps.core;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Daniel on 2018/11/15.

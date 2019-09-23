@@ -1,7 +1,7 @@
 package multiplemaps.core.google;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;

@@ -1,6 +1,6 @@
 package multiplemaps.core.google;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.maps.model.Circle;
 
