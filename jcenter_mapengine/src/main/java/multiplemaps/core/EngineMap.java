@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
 
 import android.view.View;
@@ -64,6 +68,8 @@ public interface EngineMap {
     void animateCamera(LatLngBounds latLngBounds, int width, int height, int padding);
 
     void moveCamera(LatLngBounds latLngBounds, int width, int height, int padding);
+
+    void moveCamera(LatLngBounds latLngBounds, int padding);
 
     EngineCircle addCircle(EngineCircleOptions var1);
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.here;
 
 import android.graphics.PointF;
@@ -15,6 +19,7 @@ import com.here.android.mpa.common.GeoPosition;
 import com.here.android.mpa.common.Image;
 import com.here.android.mpa.common.PositioningManager;
 import com.here.android.mpa.common.ViewObject;
+import com.here.android.mpa.mapping.AndroidXMapFragment;
 import com.here.android.mpa.mapping.Map;
 import com.here.android.mpa.mapping.MapCircle;
 import com.here.android.mpa.mapping.MapGesture;
@@ -22,7 +27,6 @@ import com.here.android.mpa.mapping.MapMarker;
 import com.here.android.mpa.mapping.MapObject;
 import com.here.android.mpa.mapping.MapPolygon;
 import com.here.android.mpa.mapping.MapState;
-import com.here.android.mpa.mapping.SupportMapFragment;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -52,7 +56,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     private Map map;
 
-    private SupportMapFragment mapFragment;
+    private AndroidXMapFragment mapFragment;
 
     private HashMap<String, EngineMapObject> mapObjects = new HashMap<>();
 
@@ -76,7 +80,7 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
 
     private boolean cameraMoving;
 
-    public HereEngineMap(@NonNull Map map, @NonNull SupportMapFragment mapFragment) {
+    public HereEngineMap(@NonNull Map map, @NonNull AndroidXMapFragment mapFragment) {
         this.map = map;
         this.mapFragment = mapFragment;
     }
@@ -353,6 +357,20 @@ public class HereEngineMap implements EngineMap, PositioningManager.OnPositionCh
         GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
         try {
             map.zoomTo(boundingBox, width, height, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void moveCamera(LatLngBounds latLngBounds, int padding) {
+        ArrayList<GeoCoordinate> list = new ArrayList<>();
+        for (LatLng latLng : latLngBounds.getPoints()) {
+            list.add(new GeoCoordinate(latLng.latitude, latLng.longitude));
+        }
+        GeoBoundingBox boundingBox = GeoBoundingBox.getBoundingBoxContainingGeoCoordinates(list);
+        try {
+            map.zoomTo(boundingBox, Map.Animation.BOW, Map.MOVE_PRESERVE_ORIENTATION);
         } catch (Exception e) {
             e.printStackTrace();
         }

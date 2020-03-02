@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 
 /**
  * Created by Daniel on 2018/11/13.

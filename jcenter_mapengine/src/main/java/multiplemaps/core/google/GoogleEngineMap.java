@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.google;
 
 import android.view.View;
@@ -291,6 +295,15 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     }
 
     @Override
+    public void moveCamera(LatLngBounds latLngBounds, int padding) {
+        com.google.android.gms.maps.model.LatLngBounds.Builder bounds = new com.google.android.gms.maps.model.LatLngBounds.Builder();
+        for (LatLng latLng : latLngBounds.getPoints()) {
+            bounds.include(new com.google.android.gms.maps.model.LatLng(latLng.latitude, latLng.longitude));
+        }
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), padding));
+    }
+
+    @Override
     public EngineCircle addCircle(EngineCircleOptions var1) {
         com.google.android.gms.maps.model.LatLng latLng = new com.google.android.gms.maps.model.LatLng(var1.getCenter().latitude, var1.getCenter().longitude);
         Circle circle = map.addCircle(new CircleOptions()
@@ -322,7 +335,7 @@ public class GoogleEngineMap implements EngineMap, GoogleMap.OnMarkerClickListen
     @Override
     public EnginePolygon addPolygon(EnginePolygonOptions var1) {
         ArrayList<com.google.android.gms.maps.model.LatLng> list = new ArrayList<>();
-        for (LatLng latLng:var1.getPoints()) {
+        for (LatLng latLng : var1.getPoints()) {
             list.add(new com.google.android.gms.maps.model.LatLng(latLng.latitude, latLng.longitude));
         }
         Polygon polygon = map.addPolygon(new PolygonOptions()

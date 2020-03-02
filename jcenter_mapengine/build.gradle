@@ -28,10 +28,16 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.danielzq:HERE-sdk:1.0.1'
+    api(name: 'HERE-sdk', ext: 'aar')
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'

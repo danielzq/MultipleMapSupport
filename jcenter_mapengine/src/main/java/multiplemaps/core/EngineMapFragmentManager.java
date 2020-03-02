@@ -1,4 +1,9 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -15,9 +20,9 @@ public class EngineMapFragmentManager {
     public static EngineMapFragment findFragment(FragmentActivity activity, int id) {
         Fragment fragment = activity.getSupportFragmentManager().findFragmentById(id);
         if (fragment instanceof GoogleMapFragment) {
-            return (GoogleMapFragment)fragment;
+            return (GoogleMapFragment) fragment;
         } else if (fragment instanceof HereMapFragment) {
-            return (HereMapFragment)fragment;
+            return (HereMapFragment) fragment;
         }
         return null;
     }
@@ -25,9 +30,9 @@ public class EngineMapFragmentManager {
     public static EngineMapFragment findFragment(Fragment f, int id) {
         Fragment fragment = f.getChildFragmentManager().findFragmentById(id);
         if (fragment instanceof GoogleMapFragment) {
-            return (GoogleMapFragment)fragment;
+            return (GoogleMapFragment) fragment;
         } else if (fragment instanceof HereMapFragment) {
-            return (HereMapFragment)fragment;
+            return (HereMapFragment) fragment;
         }
         return null;
     }

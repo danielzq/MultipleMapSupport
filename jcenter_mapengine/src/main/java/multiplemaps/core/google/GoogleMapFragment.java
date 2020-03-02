@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.google;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -26,7 +30,9 @@ public class GoogleMapFragment extends SupportMapFragment implements EngineMapFr
     @Override
     public void getEngineMapAsync(OnEngineMapReadyCallback var1) {
         onEngineMapReadyCallback = var1;
-        MapsInitializer.initialize(getContext());
+        if (getContext() != null) {
+            MapsInitializer.initialize(getContext());
+        }
         getMapAsync(this);
     }
 

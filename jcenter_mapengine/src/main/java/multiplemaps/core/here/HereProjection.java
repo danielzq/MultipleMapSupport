@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.here;
 
 import android.graphics.Point;
@@ -24,7 +28,7 @@ public class HereProjection implements Projection {
     @Override
     public Point toScreenLocation(LatLng var1) {
         Map.PixelResult pointResult = map.projectToPixel(new GeoCoordinate(var1.latitude, var1.longitude));
-        return new Point((int)pointResult.getResult().x, (int)pointResult.getResult().y);
+        return new Point((int) pointResult.getResult().x, (int) pointResult.getResult().y);
     }
 
     @Override

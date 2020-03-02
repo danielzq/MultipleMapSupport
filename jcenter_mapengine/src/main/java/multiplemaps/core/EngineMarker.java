@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
 
 /**
@@ -16,6 +20,8 @@ public interface EngineMarker extends EngineMapObject {
     void setAnchor(float x, float y);
 
     void setIcon(int iconRes);
+
+    int getIconResId();
 
     void setPosition(LatLng position);
 

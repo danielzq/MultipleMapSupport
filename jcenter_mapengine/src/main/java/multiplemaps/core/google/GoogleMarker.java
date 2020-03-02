@@ -1,4 +1,9 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.google;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +21,8 @@ import multiplemaps.core.LatLng;
 public class GoogleMarker implements EngineMarker {
 
     private Marker marker;
+
+    private int iconRes;
 
     public GoogleMarker(@NonNull Marker marker) {
         this.marker = marker;
@@ -53,7 +60,17 @@ public class GoogleMarker implements EngineMarker {
 
     @Override
     public void setIcon(int iconRes) {
-        marker.setIcon(BitmapDescriptorFactory.fromResource(iconRes));
+        this.iconRes = iconRes;
+        try {
+            marker.setIcon(BitmapDescriptorFactory.fromResource(iconRes));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getIconResId() {
+        return iconRes;
     }
 
     @Override

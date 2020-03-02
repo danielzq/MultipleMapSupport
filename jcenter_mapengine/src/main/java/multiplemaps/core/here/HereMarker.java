@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core.here;
 
 import android.graphics.PointF;
@@ -31,6 +35,8 @@ public class HereMarker implements EngineMarker {
     private Object tag;
 
     private String id;
+
+    private int iconRes;
 
     private float x = 0.5f, y = 0.5f;
 
@@ -84,6 +90,7 @@ public class HereMarker implements EngineMarker {
 
     @Override
     public void setIcon(int iconRes) {
+        this.iconRes = iconRes;
         Image image = new Image();
         try {
             image.setImageResource(iconRes);
@@ -92,6 +99,11 @@ public class HereMarker implements EngineMarker {
         }
         marker.setIcon(image);
         setAnchor(x, y);
+    }
+
+    @Override
+    public int getIconResId() {
+        return iconRes;
     }
 
     @Override

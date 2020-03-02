@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
 
 
@@ -36,8 +40,8 @@ public class EnginePolygonOptions {
     public final EnginePolygonOptions addAll(Iterable<LatLng> var1) {
         Iterator var2 = var1.iterator();
 
-        while(var2.hasNext()) {
-            LatLng var3 = (LatLng)var2.next();
+        while (var2.hasNext()) {
+            LatLng var3 = (LatLng) var2.next();
             this.points.add(var3);
         }
 

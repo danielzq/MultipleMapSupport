@@ -1,4 +1,9 @@
+/*
+ * Copyright (c) 2020 Daniel Zhang. All rights reserved.
+ */
+
 package multiplemaps.core;
+
 
 import androidx.annotation.Nullable;
 
